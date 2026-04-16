@@ -1,0 +1,23 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DOCKER_HUB_IMAGE: "$DOCKER_HUB_USERNAME/$CI_PROJECT_NAME"
+
+build:
+  stage: build
+  script:
+    - docker build -t $DOCKER_HUB_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_TOKEN
+    - docker push $DOCKER_HUB_IMAGE:$CI_COMMIT_SHORT_SHA
+
+deploy:
+  stage: deploy
+  before_script:
+    - echo "$KUBECONFIG" > /tmp/kubeconfig
+    - export KUBECONFIG=/tmp/kubeconfig
+  script:
+    - kubectl set image deployment/$CI_PROJECT_NAME $CI_PROJECT_NAME=$DOCKER_HUB_IMAGE:$CI_COMMIT_SHORT_SHA -n $KUBE_NAMESPACE
+  only:
+    - main
