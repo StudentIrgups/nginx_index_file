@@ -4,6 +4,11 @@ stages:
 
 variables:
   DOCKER_HUB_IMAGE: "$DOCKER_HUB_USERNAME/$CI_PROJECT_NAME"
+  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_TLS_CERTDIR: ""
+
+services:
+  - docker:24-dind
 
 build:
   stage: build
