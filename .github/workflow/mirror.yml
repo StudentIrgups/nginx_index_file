@@ -1,0 +1,13 @@
+# .github/workflows/mirror.yml
+name: Mirror to GitLab
+on: [push]
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: |
+          git remote add gitlab http://root:${{ secrets.GITLAB_TOKEN }}@93.77.178.234:84/root/project.git
+          git push gitlab --all
