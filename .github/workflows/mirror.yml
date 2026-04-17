@@ -9,5 +9,5 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-          git remote add gitlab http://root:${{ secrets.GITLAB_TOKEN }}@93.77.178.234:84/root/project.git
+          git remote add gitlab http://root:${{ secrets.GITLAB_TOKEN }}@93.77.178.234:84/root/nginx_index_file.git
           git push gitlab --all
