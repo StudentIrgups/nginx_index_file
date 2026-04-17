@@ -27,6 +27,6 @@ deploy:
     - echo "$KUBECONFIG" > /tmp/kubeconfig
     - export KUBECONFIG=/tmp/kubeconfig
   script:
-    - kubectl set image deployment/$CI_PROJECT_NAME $CI_PROJECT_NAME=$DOCKER_HUB_IMAGE:$CI_COMMIT_SHORT_SHA -n $KUBE_NAMESPACE
+    - kubectl set image deployment/$PROJECT_NAME $CONTAINER_NAME=$DOCKER_HUB_IMAGE:$CI_COMMIT_SHORT_SHA -n $KUBE_NAMESPACE
   only:
     - main
