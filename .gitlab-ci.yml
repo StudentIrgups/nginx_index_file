@@ -25,7 +25,9 @@ deploy:
     - chmod +x kubectl
     - mv kubectl /usr/local/bin/
     - echo "$KUBECONFIG" > /tmp/kubeconfig
+    - cat /tmp/kubeconfig | head -5
     - export KUBECONFIG=/tmp/kubeconfig
+    - kubectl config view
   script:
     - kubectl set image deployment/$PROJECT_NAME_DEPLOY $CONTAINER_NAME=$DOCKER_HUB_IMAGE:$CI_COMMIT_SHORT_SHA -n $KUBE_NAMESPACE
   only:
