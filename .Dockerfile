@@ -1,3 +1,4 @@
+
 FROM alpine:latest as fetcher
 RUN apk add --no-cache git
 RUN git clone --depth 1 https://github.com/StudentIrgups/nginx_index_file.git /source
