@@ -8,11 +8,9 @@
     <h1>Last test, push to GH -> build on GL -> deploy on GL</h1>
     <h1>Test after full deploy infrastructure</h1>
 
-    <h1>Response from: <span id="hostname">Loading...</span></h1>
+    <h1>Response from: <span id="hostname">unknown</span></h1>
     <script>
-        fetch('/hostname')
-            .then(r => r.text())
-            .then(h => document.getElementById('hostname').textContent = h);
+        document.getElementById('hostname').textContent = window.location.hostname;
     </script>
 </body>
 </html>
